@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.rigai.rigeye</groupId>
+  <artifactId>rigeye-monitor-dependence</artifactId>
+  <packaging>pom</packaging>
+  <version>1.0.0</version>
+  <modules>
+    <!--获取报警任务模块，单独抽出以便后续改造为使用Azkaban定时调度，kafka获取等-->
+    <module>rigeye-monitor-task-get</module>
+    <!--报警任务执行-->
+    <module>rigeye-monitor-task-commit</module>
+    <!--报警任务调度,最后总的打包项目-->
+    <module>rigeye-monitor-control</module>
+    <!--通用部分-->
+    <module>rigeye-monitor-common</module>
+  </modules>
+
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <influx.version>2.10</influx.version>
+    <elasticsearch.version>6.1.3</elasticsearch.version>
+    <em.fx.redis.version>1.4.1</em.fx.redis.version>
+    <em.fx.version>1.4.0</em.fx.version>
+    <influx.version>2.10</influx.version>
+    <mysql-connector.version>5.1.40</mysql-connector.version>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>2.0.3.RELEASE</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.influxdb</groupId>
+        <artifactId>influxdb-java</artifactId>
+        <version>${influx.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.em.framework</groupId>
+        <artifactId>em-framework</artifactId>
+        <version>1.4.0</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>com.em.fx.common</groupId>
+        <artifactId>em-fx-common</artifactId>
+        <version>${em.fx.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.em.fx.redis</groupId>
+        <artifactId>em-fx-redis</artifactId>
+        <version>${em.fx.redis.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.em.fx.argus</groupId>
+        <artifactId>em-fx-argus</artifactId>
+        <!--<version>1.2.0</version>-->
+        <version>1.4.0</version>
+      </dependency>
+      <dependency>
+        <groupId>com.em.fx.apollox</groupId>
+        <artifactId>em-fx-apollox</artifactId>
+        <version>${em.fx.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.em.fx.core</groupId>
+        <artifactId>em-fx-core-spring-boot-starter</artifactId>
+        <version>1.4.2</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.rigai.rigeye</groupId>
+        <artifactId>rigeye-monitor-task-get</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.rigai.rigeye</groupId>
+        <artifactId>rigeye-monitor-task-commit</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.rigai.rigeye</groupId>
+        <artifactId>rigeye-monitor-common</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <version>${mysql-connector.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+</project>

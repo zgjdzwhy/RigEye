@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+		PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.rigai.rigeye.common.dao.mysql.AlertFaultProcessorDao">
+
+	<resultMap id="getMap" type="com.rigai.rigeye.common.model.AlertFaultProcessor">
+		<result column="id" property="id" jdbcType="INTEGER"/>
+		<result column="alert_task_id" property="alertTaskId" jdbcType="INTEGER"/>
+		<result column="alert_rule_ids" property="alertRuleIds" jdbcType="VARCHAR"/>
+		<result column="alert_date" property="alertDate" jdbcType="DATE"/>
+		<result column="trigger_rule_desc" property="triggerRuleDesc" jdbcType="VARCHAR"/>
+		<result column="alert_num" property="alertNum" jdbcType="INTEGER"/>
+		<result column="alert_fault_desc" property="alertFaultDesc" jdbcType="VARCHAR"/>
+		<result column="realname" property="realname" jdbcType="VARCHAR"/>
+		<result column="taskStatus" property="taskStatus" jdbcType="INTEGER"/>
+		<result column="app_name" property="appName" jdbcType="VARCHAR"/>
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+		<result column="alert_level" property="alertLevel" jdbcType="VARCHAR"/>
+	</resultMap>
+</mapper>
