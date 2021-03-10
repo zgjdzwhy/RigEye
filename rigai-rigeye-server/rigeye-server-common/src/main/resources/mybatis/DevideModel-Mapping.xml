@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper 
+  PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.rigai.rigeye.common.dao.mysql.DevideModelDao">
+	<resultMap id="getMap" type="com.rigai.rigeye.common.model.DevideModel">
+		<result column="id" property="id" jdbcType="BIGINT"/>
+		<result column="task_id" property="taskId" jdbcType="BIGINT"/>
+		<result column="devideModel" property="filedName" jdbcType="VARCHAR"/>
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+	</resultMap>
+</mapper>

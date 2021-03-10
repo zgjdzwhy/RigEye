@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper 
+  PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.rigai.rigeye.common.dao.mysql.ContactsGroupDao">
+
+	<resultMap id="getMap" type="com.rigai.rigeye.common.model.ContactsGroup">
+		<result column="id" property="id" jdbcType="INTEGER"/>
+		<result column="group_name" property="groupName" jdbcType="VARCHAR"/>
+	</resultMap>
+
+
+</mapper>

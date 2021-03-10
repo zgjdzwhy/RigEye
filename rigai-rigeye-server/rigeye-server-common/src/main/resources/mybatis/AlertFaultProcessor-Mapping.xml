@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+		PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.rigai.rigeye.common.dao.mysql.AlertFaultProcessorDao">
+
+	<resultMap id="getMap" type="com.rigai.rigeye.common.model.AlertFaultProcessor">
+		<result column="id" property="id" jdbcType="INTEGER"/>
+		<result column="alert_task_id" property="alertTaskId" jdbcType="VARCHAR"/>
+		<result column="alert_rule_ids" property="alertRuleIds" jdbcType="INTEGER"/>
+		<result column="alert_date" property="alertDate" jdbcType="DATE"/>
+		<result column="trigger_rule_desc" property="triggerRuleDesc" jdbcType="VARCHAR"/>
+		<result column="alert_num" property="alertNum" jdbcType="INTEGER"/>
+		<result column="alert_fault_desc" property="alertFaultDesc" jdbcType="VARCHAR"/>
+		<result column="realname" property="realname" jdbcType="VARCHAR"/>
+		<result column="taskStatus" property="taskStatus" jdbcType="INTEGER"/>
+		<result column="app_name" property="appName" jdbcType="VARCHAR"/>
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+		<result column="alert_level" property="alertLevel" jdbcType="VARCHAR"/>
+	</resultMap>
+
+	<resultMap id="getAggMap" type="com.rigai.rigeye.common.dto.AlertFaultAndAlertTask">
+		<result column="id" property="id" jdbcType="INTEGER"/>
+		<result column="alert_date" property="alertDate" jdbcType="DATE"/>
+		<result column="trigger_rule_desc" property="triggerRuleDesc" jdbcType="VARCHAR"/>
+		<result column="alert_num" property="alertNum" jdbcType="INTEGER"/>
+		<result column="app_name" property="appName" jdbcType="VARCHAR"/>
+		<result column="level" property="level" jdbcType="VARCHAR"/>
+		<result column="name" property="name" jdbcType="VARCHAR"/>
+		<result column="alert_task_id" property="taskId" jdbcType="INTEGER"/>
+	</resultMap>
+
+	<select id="getAlertFaultAgg" resultMap="getAggMap">
+		SELECT
+		p.id,
+		p.alert_date,
+		p.app_name,
+		p.alert_num,
+		p.trigger_rule_desc,
+		t.level,
+		p.alert_task_id,
+		t.name FROM alert_fault_processor p LEFT JOIN alert_task t ON p.alert_task_id = t.Id
+		WHERE t.is_del=0
+		<if test="appName != null  and appName !=''">
+			and p.app_name = #{appName}
+		</if>
+		<if test="startTime != null">
+			AND p.alert_date >= #{startTime}
+		</if>
+		<if test="endTime != null">
+			AND  #{endTime} > p.alert_date
+		</if>
+		<if test="level != null and level != ''">
+			AND t.level = #{level}
+		</if>
+		<if test="alertName != null and alertName != ''">
+			AND t.name like "%"#{alertName}"%"
+		</if>
+        order by p.alert_date desc
+	</select>
+</mapper>

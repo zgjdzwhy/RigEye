@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper 
+  PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.rigai.rigeye.common.dao.mysql.DataProcessorErrorDao">
+
+	<resultMap id="getMap" type="com.rigai.rigeye.common.model.DataProcessorError">
+		<result column="id" property="id" jdbcType="INTEGER"/>
+		<result column="start_time" property="startTime" jdbcType="TIMESTAMP"/>
+		<result column="end_time" property="endTime" jdbcType="TIMESTAMP"/>
+		<result column="num" property="num" jdbcType="INTEGER"/>
+		<result column="error_type" property="errorType" jdbcType="VARCHAR"/>
+		<result column="error-desc" property="error-desc" jdbcType="VARCHAR"/>
+		<result column="error_sample" property="errorSample" jdbcType="VARCHAR"/>
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+		<result column="type" property="type" jdbcType="INTEGER"/>
+	</resultMap>
+
+
+</mapper>

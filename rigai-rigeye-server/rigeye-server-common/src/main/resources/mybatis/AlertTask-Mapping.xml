@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper 
+  PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.rigai.rigeye.common.dao.mysql.AlertTaskDao">
+
+	<resultMap id="getMap" type="com.rigai.rigeye.common.model.AlertTask">
+		<result column="Id" property="id" jdbcType="INTEGER"/>
+		<result column="name" property="name" jdbcType="VARCHAR"/>
+		<result column="app_name" property="appName" jdbcType="VARCHAR"/>
+		<result column="alert_data_set" property="alertDataSet" jdbcType="CHAR"/>
+		<result column="much_rule_condition" property="muchRuleCondition" jdbcType="VARCHAR"/>
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+		<result column="monitor_status" property="monitorStatus" jdbcType="TINYINT"/>
+		<result column="level" property="level" jdbcType="VARCHAR"/>
+		<result column="status" property="status" jdbcType="TINYINT"/>
+		<result column="notice_title" property="noticeTitle" jdbcType="VARCHAR"/>
+		<result column="notice_template" property="noticeTemplate" jdbcType="VARCHAR"/>
+		<result column="notice_start_time" property="noticeStartTime" jdbcType="VARCHAR"/>
+		<result column="notice_end_time" property="noticeEndTime" jdbcType="VARCHAR"/>
+		<result column="user_id" property="userId" jdbcType="VARCHAR"/>
+		<result column="type" property="type" jdbcType="INTEGER"/>
+		<result column="is_del" property="isDel" jdbcType="VARCHAR"/>
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+	</resultMap>
+
+	<select id="listAlertTask" resultMap="getMap">
+		SELECT * FROM alert_task
+		<where>
+			is_del=0
+			<if test="alertTask.name !=null ">
+				and name=#{alertTask.name}
+			</if>
+			<if test="alertTask.appName !=null ">
+				and app_name=#{alertTask.appName}
+			</if>
+			<if test="modules != null">
+				and app_name in
+				<foreach collection="modules" index="index" item="item" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+			</if>
+		</where>
+	</select>
+</mapper>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper 
+  PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.rigai.rigeye.common.dao.mysql.DataTaskDao">
+
+	<resultMap id="getMap" type="com.rigai.rigeye.common.model.DataTask">
+		<result column="id" property="id" jdbcType="BIGINT"/>
+		<result column="task_name" property="taskName" jdbcType="VARCHAR"/>
+		<result column="app_name" property="appName" jdbcType="VARCHAR"/>
+		<result column="data_source_id" property="dataSourceId" jdbcType="INTEGER"/>
+		<result column="encode" property="encode" jdbcType="VARCHAR"/>
+		<result column="log_sample" property="logSample" jdbcType="VARCHAR"/>
+		<result column="log_analysis_xml" property="logAnalysisXml" jdbcType="VARCHAR"/>
+		<result column="devideModel" property="model" jdbcType="VARCHAR"/>
+		<result column="monitor_type" property="monitorType" jdbcType="TINYINT"/>
+		<result column="task_status" property="taskStatus" jdbcType="TINYINT"/>
+		<result column="monitor_status" property="monitorStatus" jdbcType="TINYINT"/>
+		<result column="clean_type" property="cleanType" jdbcType="TINYINT"/>
+		<result column="user_id" property="userId" jdbcType="VARCHAR"/>
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+		<result column="is_del" property="isDel" jdbcType="TINYINT"/>
+		<result column="data_sink_id" property="dataSinkId" jdbcType="INTEGER"/>
+		<result column="start_param" property="startParam" jdbcType="VARCHAR"/>
+		<result column="app_run_id" property="appRunId" jdbcType="VARCHAR"/>
+		<result column="offset" property="offset" jdbcType="VARCHAR"/>
+	</resultMap>
+
+	<select id="findDataTaskNameByUserId" resultType="STRING">
+		select task_name from data_task where user_id = #{userId} and is_del = 0
+	</select>
+	<select id="findAppNameByUserId" resultType="STRING">
+		select distinct(app_name) from data_task where user_id = #{userId} and is_del = 0
+	</select>
+
+	<select id="findByUserIdAndIdIn" resultMap="getMap">
+		select * from data_task where id in
+			<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		 and user_id = #{userId} and is_del = 0
+	</select>
+
+	<select id="pageFindList" resultMap="getMap">
+		select * from data_task
+		<where>
+			<if test="task.userId != null and task.userId != ''">
+				user_id = #{task.userId}
+			</if>
+			<if test="task.appName != null and task.appName != ''">
+				and app_name = #{task.appName}
+			</if>
+			<if test="task.taskName != null and task.taskName != ''">
+				and task_name = #{task.taskName}
+			</if>
+			<if test="task.monitorStatus != null and task.monitorStatus != ''">
+				and monitor_status = #{task.monitorStatus}
+			</if>
+			<if test="task.isDel != null ">
+				and is_del = #{task.isDel}
+			</if>
+			<if test="modules != null">
+				and app_name in
+				<foreach collection="modules" index="index" item="item" open="(" separator="," close=")">
+					             #{item}
+				</foreach>
+			</if>
+		</where>
+		order by update_time desc
+	</select>
+</mapper>
