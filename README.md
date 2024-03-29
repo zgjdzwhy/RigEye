@@ -652,4 +652,4 @@ Esid:明细日志在es中的id
 >   ![](media/35ade73bd4fc20968dcf3191716d7c7d.png)
 
 添加作者微信
->    <img src="media/wechat.jpg" style="zoom: 33%;" />
+>    ![](media/wechat.jpg)
