@@ -220,7 +220,7 @@ RigEye
 
 >   **设置异常检测**：设置异常检测数据集，主要针对日志中的异常关键字做模糊匹配识别，每个监控任务只能添加一个异常检测数据集
 
->   **设置明细数据目标地**：该区别可以设置清洗后的数据输出给下游使用，目前只支持输出到kakfa
+>   **设置明细数据目标地**：该区域可以设置清洗后的数据输出给下游使用，目前只支持输出到kakfa
 
 >   **设置任务运行资源**：如果数据来源量比较大，可以自定义设置任务运行资源来提升任务处理能力
 
@@ -439,17 +439,17 @@ Esid:明细日志在es中的id
 
 >   假如某系统的交易日志如下：
 
->   2018-10-08 11:00:01\|evan\|170794\|登录
+>   2023-10-08 11:00:01\|evan\|170794\|登录
 
->   2018-10-08 11:00:02\|evan\|170794\|发贴
+>   2023-10-08 11:00:02\|evan\|170794\|发贴
 
->   2018-10-08 11:10:01\|evan\|170794\|回贴
+>   2023-10-08 11:10:01\|evan\|170794\|回贴
 
 >   以第一行数据为例，假设目标切分结果为如下几个键值对：
 
 | **Key 类型** | **Key**    | **Value**           |
-|--------------|------------|---------------------|
-| Date         | @timestamp | 2018-10-08 11:00:01 |
+| ------------ | ---------- | ------------------- |
+| Date         | @timestamp | 2023-10-08 11:00:01 |
 | String       | username   | evan                |
 | Long         | userid     | 170794              |
 | String       | event      | 登录                |
@@ -498,13 +498,13 @@ Esid:明细日志在es中的id
 
 >   样例日志：
 
->   2018-10-08 11:00:01\|evan \|170794\|买入
+>   2023-10-08 11:00:01\|evan \|170794\|买入
 
->   2018-10-08 11:10:01\|evan\|170794\|卖出
+>   2023-10-08 11:10:01\|evan\|170794\|卖出
 
 >   自定义切分逻辑：
 
->   ![http://aliware-images.oss-cn-hangzhou.aliyuncs.com/arms/ex_preset_splitter_single_separator.png](media/a6824ad828330c1c719d984885c71786.png)
+>   !(media/a6824ad828330c1c719d984885c71786.png)
 
 >   切分逻辑说明：
 
@@ -534,13 +534,13 @@ Esid:明细日志在es中的id
 
 >   样例日志：
 
->   2018-07-25 17:25:00,aaa\|b\~1
+>   2023-07-25 17:25:00,aaa\|b\~1
 
->   2018-07-25 17:26:00,aaa\|b\~1
+>   2023-07-25 17:26:00,aaa\|b\~1
 
 >   自定义切分逻辑：
 
->   ![http://aliware-images.oss-cn-hangzhou.aliyuncs.com/arms/ex_preset_splitter_multi_separator.png](media/e5959078d2c6a94a5b6b537688dd797a.png)
+>   !(media/e5959078d2c6a94a5b6b537688dd797a.png)
 
 >   切分结果：
 
@@ -557,11 +557,11 @@ Esid:明细日志在es中的id
 
 >   样例日志：
 
->   117.xx.xx.xx 835158 - [26 May 2014:14:05:28 +0800] "GET
+>   117.xx.xx.xx 835158 - [26 May 2023:14:05:28 +0800] "GET
 >   http://www.xxxxxx.com/trade/detail/trade_snap.htm?spm=a1z0f.2.100003.9.8BpicQ&trade_id=664793864233811"
 >   302 0
 
->   117.xx.xx.xx 835158 - [26 May 2014:14:05:28 +0800] "GET
+>   117.xx.xx.xx 835158 - [26 May 2023:14:05:28 +0800] "GET
 >   http://www.xxxxxx.com/trade/detail/trade_snap.htm?spm=a1z0f.2.100003.9.8BpicQ&trade_id=664793864233811"
 >   302 0
 
@@ -578,7 +578,7 @@ Esid:明细日志在es中的id
 
     RigEye 提供了顺序分隔符切分器，可以满足本示例的需求。切分逻辑：
 
-    ![http://aliware-images.oss-cn-hangzhou.aliyuncs.com/arms/ex_preset_splitter_sequential_separator.png](media/2c7f6a0b352c55d6b79d91ab0b9ae315.png)
+    ![](media/2c7f6a0b352c55d6b79d91ab0b9ae315.png)
 
     切分逻辑说明：
 
@@ -602,7 +602,7 @@ Esid:明细日志在es中的id
 
 >   切分逻辑：
 
->   ![http://aliware-images.oss-cn-hangzhou.aliyuncs.com/arms/ex_preset_splitter_kv1.png](media/8f253d699b3e9f06b20f6930e44ca9af.png)
+>   ![](media/8f253d699b3e9f06b20f6930e44ca9af.png)
 
 >   **注意：**
 
@@ -625,7 +625,7 @@ Esid:明细日志在es中的id
 
     目标是将 quantity 变为 LongKey，date 变为 DateKey。切分逻辑：
 
-    ![http://aliware-images.oss-cn-hangzhou.aliyuncs.com/arms/ex_preset_splitter_kv2.png](media/2dec3e614fab0f5d113c0312f7aa2d4d.png)
+    ![](media/2dec3e614fab0f5d113c0312f7aa2d4d.png)
 
 #### **4.5.2.5 JSON 切分器**
 
@@ -645,8 +645,11 @@ Esid:明细日志在es中的id
 
 >   将该 JSON 放在一行文本中，使用 JSON 切分器进行切分。切分逻辑：
 
->   ![http://aliware-images.oss-cn-hangzhou.aliyuncs.com/arms/ex_preset_splitter_json1.png](media/b25171a51a944f0e77faa8a55480df0e.png)
+>   !(media/b25171a51a944f0e77faa8a55480df0e.png)
 
 >   切分结果：
 
 >   ![](media/35ade73bd4fc20968dcf3191716d7c7d.png)
+
+添加作者微信
+>    <img src="media/wechat.jpg" style="zoom: 33%;" />
